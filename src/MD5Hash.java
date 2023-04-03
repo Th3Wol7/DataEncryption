@@ -5,9 +5,11 @@ import java.util.List;
 
 public class MD5Hash {
 
+    private String input;
     // Calculates the MD5 hash of a given input string
     public String calculateHash(String input) {
         try {
+            this.input = input;
             // Create an instance of the Java built in  MD5 hash algorithm
             MessageDigest mdObj = MessageDigest.getInstance("MD5");
 
@@ -27,20 +29,14 @@ public class MD5Hash {
         }
     }
 
-    // Checking for inputs that produce the same MD5 hash as the given hash value
+    // Incomplete - Checking for inputs that produce the same MD5 hash as the given hash value
     public List<String> findCollisions(String hash) {
         List<String> collidingInputs = new ArrayList<>();
-
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            String input = String.valueOf(i);
-
-            // Computing the MD5 hash of the input string
-            String inputHash = calculateHash(input);
-
-            // Checking if the hash value matches the given hash
-            if (inputHash.equals(hash)) {
-                collidingInputs.add(input);
-            }
+        String inputHash = calculateHash(input);
+        // Checking if the hash value matches the given hash
+        // Computing the MD5 hash of the input string
+        if (inputHash.equals(hash)) {
+            collidingInputs.add(input);
         }
         //Returning list of collisions
         return collidingInputs;
